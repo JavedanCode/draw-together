@@ -1,11 +1,14 @@
 const express = require("express");
 const expressSession = require("express-session");
+const passport = require("passport");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("../db/prisma");
 
-const path = require("node:path");
 require("dotenv").config();
+require("./config/passport");
+
 const PORT = process.env.PORT || 3000;
+const path = require("node:path");
 
 const app = express();
 
@@ -30,6 +33,9 @@ app.use(
     }),
   }),
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((err, req, res, next) => {
   console.error(err);
