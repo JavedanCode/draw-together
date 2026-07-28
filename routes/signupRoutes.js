@@ -4,7 +4,7 @@ const router = express.Router();
 const signupValidation = require("../validation/signupValidation");
 const signupController = require("../controllers/signupController");
 
-router.get("/signup", signupController.getSignupForm);
-router.post("/signup", signupValidation, signupController.createUser);
+router.get("/", signupController.getSignupForm);
+router.post("/", signupValidation, signupController.createUser);
 
 module.exports = router;
