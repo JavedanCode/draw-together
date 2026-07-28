@@ -19,8 +19,6 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/signup", signupRoutes);
-
 app.use(
   expressSession({
     cookie: {
@@ -38,6 +36,8 @@ app.use(
 );
 
 app.use(passport.session());
+
+app.use("/signup", signupRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
