@@ -39,3 +39,5 @@ const createUserQuery = async (user) => {
     },
   });
 };
+
+module.exports = { createUserQuery };
