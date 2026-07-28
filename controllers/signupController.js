@@ -30,3 +30,8 @@ const createUser = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = {
+  getSignupForm,
+  createUser,
+};
