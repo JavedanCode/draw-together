@@ -3,6 +3,7 @@ const expressSession = require("express-session");
 const passport = require("passport");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("./db/prisma");
+const signupRoutes = require("./routes/signupRoutes");
 
 require("dotenv").config();
 require("./config/passport");
@@ -17,6 +18,8 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/signup", signupRoutes);
 
 app.use(
   expressSession({
