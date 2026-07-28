@@ -4,6 +4,7 @@ const passport = require("passport");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("./db/prisma");
 const signupRoutes = require("./routes/signupRoutes");
+const loginRoutes = require("./routes/loginRoutes");
 
 require("dotenv").config();
 require("./config/passport");
@@ -38,6 +39,18 @@ app.use(
 app.use(passport.session());
 
 app.use("/signup", signupRoutes);
+app.use("/login", loginRoutes);
+
+// Test route for login
+app.get("/test", (req, res) => {
+  console.log(req.user);
+
+  if (req.isAuthenticated()) {
+    return res.send(`Hello ${req.user.username}`);
+  }
+
+  res.send("Not logged in");
+});
 
 app.use((err, req, res, next) => {
   console.error(err);
