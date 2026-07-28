@@ -2,7 +2,7 @@ const signupQueries = require("../db/queries/signupQueries");
 const { validationResult } = require("express-validator");
 
 const getSignupForm = (req, res) => {
-  res.render("signup", { title: "Signup" });
+  res.render("signup", { title: "Signup", error: [], oldInput: {} });
 };
 
 const createUser = async (req, res, next) => {
