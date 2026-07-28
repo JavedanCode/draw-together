@@ -1,6 +1,3 @@
-//Create User Edge Cases:
-//User/Username already exists
-
 const prisma = require("../prisma");
 const bcrypt = require("bcryptjs");
 
