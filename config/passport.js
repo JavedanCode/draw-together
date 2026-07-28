@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const prisma = require("../db/prisma");
 const bcrypt = require("bcryptjs");
 
-const verfyCallback = async (username, password, done) => {
+const verifyCallback = async (username, password, done) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -13,7 +13,7 @@ const verfyCallback = async (username, password, done) => {
 
     if (!user) {
       return done(null, false, {
-        message: "Incorrect username",
+        message: "Incorrect username or password",
       });
     }
 
@@ -21,7 +21,7 @@ const verfyCallback = async (username, password, done) => {
 
     if (!match) {
       return done(null, false, {
-        message: "Incorrect password",
+        message: "Incorrect username or password",
       });
     }
 
@@ -31,7 +31,7 @@ const verfyCallback = async (username, password, done) => {
   }
 };
 
-passport.use(new LocalStrategy(verfyCallback));
+passport.use(new LocalStrategy(verifyCallback));
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
