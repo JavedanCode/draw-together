@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const messageController = require("../controllers/messageController");
-const ensureAuthentication = require("../controllers/authMiddleware");
+const ensureAuthentication = require("../controllers/middleware/ensureAuthentication");
+const ensureMessageOwner = require("../controllers/middleware/ensureMessageOwner");
 
 //GET ALL MESSAGES
 router.get("/", messageController.getAllMessages);
@@ -26,6 +27,7 @@ router.post("/", ensureAuthentication, messageController.addMessage);
 router.post(
   "/:id/update",
   ensureAuthentication,
+  ensureMessageOwner,
   messageController.updateMessage,
 );
 
@@ -33,6 +35,7 @@ router.post(
 router.post(
   "/:id/delete",
   ensureAuthentication,
+  ensureMessageOwner,
   messageController.deleteMessage,
 );
 
