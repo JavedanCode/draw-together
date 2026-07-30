@@ -37,16 +37,7 @@ const addMessage = async (req, res, next) => {
 
 const deleteMessage = async (req, res, next) => {
   try {
-    const message = await messageQueries.getMessageQuery(
-      req.user.id,
-      req.params.id,
-    );
-    if (!message) {
-      const err = new Error("You're not authorized to delete this drawing");
-      err.status = 403;
-      throw err;
-    }
-    await messageQueries.deleteMessageQuery(req.params.id);
+    await messageQueries.deleteMessageQuery(req.drawing.id);
     return res.redirect("/");
   } catch (err) {
     next(err);
@@ -55,16 +46,7 @@ const deleteMessage = async (req, res, next) => {
 
 const updateMessage = async (req, res, next) => {
   try {
-    const message = await messageQueries.getMessageQuery(
-      req.user.id,
-      req.params.id,
-    );
-    if (!message) {
-      const err = new Error("You're not authorized to update this drawing");
-      err.status = 403;
-      throw err;
-    }
-    await messageQueries.updateMessageQuery(req.params.id, {
+    await messageQueries.updateMessageQuery(req.drawing.id, {
       imageData: req.body.imageData,
     });
     return res.redirect("/");
