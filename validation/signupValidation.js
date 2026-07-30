@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const prisma = require("../db/prisma");
 
 const signupValidation = [
   body("email")
@@ -7,7 +8,19 @@ const signupValidation = [
     .withMessage("Email is required.")
     .isEmail()
     .withMessage("Please enter a valid email.")
-    .normalizeEmail(),
+    .normalizeEmail()
+    .bail()
+    .custom(async (email, { req }) => {
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
+
+      if (existingUser && existingUser.id !== req.user.id) {
+        throw new Error("User with this email already exists.");
+      }
+
+      return true;
+    }),
 
   body("username")
     .trim()
@@ -16,7 +29,19 @@ const signupValidation = [
     .isLength({ min: 3, max: 20 })
     .withMessage("Username must be between 3 and 20 characters.")
     .isAlphanumeric()
-    .withMessage("Username may only contain letters and numbers"),
+    .withMessage("Username may only contain letters and numbers")
+    .bail()
+    .custom(async (username, { req }) => {
+      const existingUser = await prisma.user.findUnique({
+        where: { username },
+      });
+
+      if (existingUser && existingUser.id !== req.user.id) {
+        throw new Error("Username already exists.");
+      }
+
+      return true;
+    }),
 
   body("password")
     .notEmpty()
