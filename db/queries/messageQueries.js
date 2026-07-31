@@ -35,7 +35,12 @@ const getUserMessagesQuery = async (userId) => {
 const getAllMessagesQuery = async () => {
   return prisma.drawing.findMany({
     include: {
-      author: true,
+      author: {
+        select: {
+          id: true,
+          username: true,
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",
