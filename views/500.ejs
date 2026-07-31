@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+
+<main class="error-page">
+
+    <h1>500</h1>
+
+    <h2>Something went wrong.</h2>
+
+    <p>
+        An unexpected error occurred while processing your request.
+        Please try again later.
+    </p>
+
+    <% if (error) { %>
+        <div class="error-details">
+            <strong>Development Error:</strong>
+            <pre><%= error %></pre>
+        </div>
+    <% } %>
+
+    <a href="/" class="button">
+        Return Home
+    </a>
+
+</main>
+
+</body>
+</html>
