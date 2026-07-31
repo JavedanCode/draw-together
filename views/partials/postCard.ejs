@@ -1,0 +1,75 @@
+<article class="drawing-card">
+
+    <header class="drawing-header">
+
+        <div>
+
+            <h3>
+
+                <% if(user.featuredMember){ %>
+
+                    <%= message.author.username %>
+
+                <% }else{ %>
+
+                    Anonymous
+
+                <% } %>
+
+            </h3>
+
+            <p>
+
+                <% if(user.featuredMember){ %>
+
+                    <%= message.createdAt.toLocaleString() %>
+
+                <% } %>
+
+            </p>
+
+        </div>
+
+    </header>
+
+    <div class="drawing-body">
+
+        <img
+            src="<%= message.imageData %>"
+            alt="User drawing"
+        >
+
+    </div>
+
+    <% if(user.admin || user.id === message.authorId){ %>
+
+        <footer class="drawing-actions">
+
+            <% if(user.id === message.authorId){ %>
+
+                <a
+                    href="/messages/<%= message.id %>/update"
+                >
+                    Update
+                </a>
+
+            <% } %>
+
+            <form
+                action="/messages/<%= message.id %>/delete"
+                method="POST"
+            >
+
+                <button>
+
+                    Delete
+
+                </button>
+
+            </form>
+
+        </footer>
+
+    <% } %>
+
+</article>
