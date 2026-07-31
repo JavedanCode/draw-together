@@ -5,8 +5,6 @@ const messageController = require("../controllers/messageController");
 const ensureAuthentication = require("../controllers/middleware/ensureAuthentication");
 const ensureMessageOwner = require("../controllers/middleware/ensureMessageOwner");
 
-//GET ALL MESSAGES
-router.get("/", ensureAuthentication, messageController.getAllMessages);
 //GET USER MESSAGES
 router.get("/mine", ensureAuthentication, messageController.getUserMessages);
 
