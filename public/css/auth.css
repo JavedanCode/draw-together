@@ -1,0 +1,176 @@
+/* ===========================
+   LOGIN PAGE LAYOUT
+=========================== */
+
+.auth-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 2.5rem;
+
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-header {
+  text-align: center;
+
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+
+  margin-bottom: 0.5rem;
+
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+
+  line-height: 1.6;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.4rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.6rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  color: var(--text);
+}
+
+.form-group input {
+  width: 100%;
+
+  padding: 0.85rem 1rem;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border);
+
+  background: var(--surface-light);
+
+  color: var(--text);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-group input:focus {
+  border-color: var(--accent);
+
+  box-shadow: 0 0 0 4px rgba(91, 140, 255, 0.18);
+}
+
+.primary-btn {
+  margin-top: 0.5rem;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 0.95rem;
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  color: white;
+
+  background: var(--accent);
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.primary-btn:hover {
+  background: var(--accent-hover);
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+.auth-footer {
+  margin-top: 2rem;
+
+  text-align: center;
+
+  color: var(--text-secondary);
+}
+
+.auth-footer a {
+  color: var(--accent);
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+.form-error {
+  margin-bottom: 1.5rem;
+
+  padding: 0.9rem 1rem;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(239, 68, 68, 0.35);
+
+  background: rgba(239, 68, 68, 0.12);
+
+  color: #ffb3b3;
+
+  font-size: 0.9rem;
+}
+
+.form-error ul {
+  list-style: none;
+}
+
+.form-error li + li {
+  margin-top: 0.4rem;
+}
