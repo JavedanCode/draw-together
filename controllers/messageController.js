@@ -3,7 +3,7 @@ const messageQueries = require("../db/queries/messageQueries");
 const getAllMessages = async (req, res, next) => {
   try {
     const messages = await messageQueries.getAllMessagesQuery();
-    res.render("dashboard", { title: "Dashboard", messages });
+    res.render("dashboard", { title: "Dashboard", messages, user: req.user });
   } catch (err) {
     next(err);
   }
@@ -19,11 +19,23 @@ const getUserMessages = async (req, res, next) => {
 };
 
 const getMessageForm = async (req, res) => {
-  res.render("MessageForm", { title: "Create Message" });
+  res.render("drawingForm", {
+    title: "Create Drawing",
+    drawing: null,
+    user: req.user,
+  });
 };
 
 const getUpdateMessageForm = async (req, res) => {
-  res.render("UpdateMessage", { title: "Update Message" });
+  const drawing = await messageQueries.getMessageQuery(
+    req.user.id,
+    req.params.id,
+  );
+  res.render("drawingForm", {
+    title: "Edit Drawing",
+    drawing,
+    user: req.user,
+  });
 };
 
 const addMessage = async (req, res, next) => {
