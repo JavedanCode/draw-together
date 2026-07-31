@@ -1,0 +1,63 @@
+<header class="navbar">
+
+    <div class="nav-left">
+
+        <a
+            href="/"
+            class="logo"
+        >
+            Draw Together
+        </a>
+
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="/messages/new">
+            New Drawing
+        </a>
+
+        <% if(!user.featuredMember){ %>
+
+            <a href="/membership">
+                Become Featured
+            </a>
+
+        <% } %>
+
+        <a href="/user">
+            Profile
+        </a>
+
+        <select
+            id="themeSelector"
+            class="theme-selector"
+        >
+
+            <option value="dark">
+                Dark
+            </option>
+
+            <option value="light">
+                Light
+            </option>
+
+        </select>
+
+        <form
+            action="/login/logout"
+            method="POST"
+        >
+
+            <button
+                type="submit"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
+        </form>
+
+    </nav>
+
+</header>
