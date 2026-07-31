@@ -4,13 +4,8 @@ const loginController = require("../controllers/loginController");
 const passport = require("passport");
 
 router.get("/", loginController.getLoginForm);
-router.post(
-  "/",
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-  }),
-  loginController.loginUser,
-);
+
+router.post("/", loginController.loginUser);
 
 router.post("/logout", (req, res, next) => {
   req.logout((err) => {
