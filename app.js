@@ -5,6 +5,10 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("./db/prisma");
 const signupRoutes = require("./routes/signupRoutes");
 const loginRoutes = require("./routes/loginRoutes");
+const messageRoutes = require("./routes/messageRoutes");
+const membershipRoutes = require("./routes/membershipRoutes");
+const userRoutes = require("./routes/userRoutes");
+const indexRoutes = require("./routes/indexRoutes");
 
 require("dotenv").config();
 require("./config/passport");
@@ -18,7 +22,18 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "10mb",
+  }),
+);
+
+app.use(
+  express.json({
+    limit: "10mb",
+  }),
+);
 
 app.use(
   expressSession({
@@ -40,17 +55,10 @@ app.use(passport.session());
 
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
-
-// Test route for login
-app.get("/test", (req, res) => {
-  console.log(req.user);
-
-  if (req.isAuthenticated()) {
-    return res.send(`Hello ${req.user.username}`);
-  }
-
-  res.send("Not logged in");
-});
+app.use("/messages", messageRoutes);
+app.use("/user", userRoutes);
+app.use("/membership", membershipRoutes);
+app.use("/", indexRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
