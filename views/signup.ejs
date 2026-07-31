@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+
+<main class="auth-page">
+
+    <section class="auth-card">
+
+        <div class="auth-header">
+
+            <h1 class="logo">
+                Draw Together
+            </h1>
+
+            <p class="subtitle">
+                Create your account and start drawing.
+            </p>
+
+        </div>
+
+        <% if (errors && errors.length > 0) { %>
+
+            <div class="form-error">
+
+                <ul>
+
+                    <% errors.forEach(error => { %>
+
+                        <li><%= error.msg %></li>
+
+                    <% }) %>
+
+                </ul>
+
+            </div>
+
+        <% } %>
+
+        <form
+            action="/signup"
+            method="POST"
+            class="auth-form"
+        >
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    value="<%= oldInput?.email || '' %>"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    autocomplete="username"
+                    value="<%= oldInput?.username || '' %>"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+
+            <p>
+
+                Already have an account?
+
+                <a href="/login">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>
