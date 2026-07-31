@@ -23,7 +23,7 @@ router.post("/", ensureAuthentication, messageController.addMessage);
 
 //POST UPDATED MESSAGE
 router.post(
-  "/:id/update",
+  "/:id",
   ensureAuthentication,
   ensureMessageOwner,
   messageController.updateMessage,
