@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+
+<main class="auth-page">
+
+    <section class="auth-card">
+
+        <div class="auth-header">
+
+            <h1 class="logo">
+                Draw Together
+            </h1>
+
+            <p class="subtitle">
+                Draw instead of typing.
+            </p>
+
+        </div>
+
+        <% if (error) { %>
+
+            <div class="form-error">
+
+                <%= error %>
+
+            </div>
+
+        <% } %>
+
+        <form
+            action="/login"
+            method="POST"
+            class="auth-form"
+        >
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                Login
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+
+            <p>
+
+                Don't have an account?
+
+                <a href="/signup">
+                    Create one
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>
