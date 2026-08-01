@@ -1,0 +1,279 @@
+/* ===================================
+   PAGE
+=================================== */
+
+.messages-page {
+  width: min(1200px, 94%);
+  margin: 3rem auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* ===================================
+   HEADER
+=================================== */
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  padding: 2rem;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  box-shadow: var(--shadow-lg);
+}
+
+.gallery-header h1 {
+  font-size: 2rem;
+
+  margin-bottom: 0.35rem;
+}
+
+.gallery-header p {
+  color: var(--text-secondary);
+}
+
+/* ===================================
+   EMPTY STATE
+=================================== */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1rem;
+
+  text-align: center;
+
+  padding: 5rem 2rem;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  box-shadow: var(--shadow-lg);
+}
+
+.empty-icon {
+  font-size: 5rem;
+}
+
+.empty-state h2 {
+  font-size: 2rem;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+
+  max-width: 450px;
+
+  line-height: 1.7;
+}
+
+/* ===================================
+   GALLERY
+=================================== */
+
+.drawing-gallery {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+
+  gap: 2rem;
+}
+
+/* ===================================
+   CARD
+=================================== */
+
+.drawing-card {
+  display: flex;
+  flex-direction: column;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow: var(--shadow-lg);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.drawing-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+}
+
+/* ===================================
+   IMAGE
+=================================== */
+
+.drawing-preview {
+  background: var(--surface-light);
+
+  padding: 1.5rem;
+}
+
+.drawing-preview img {
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: contain;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 12px 25px rgba(0, 0, 0, 0.18);
+
+  transition: transform 0.2s ease;
+}
+
+.drawing-card:hover img {
+  transform: scale(1.015);
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+.drawing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 2rem;
+
+  padding: 1.4rem 1.5rem;
+}
+
+.drawing-date,
+.drawing-updated {
+  color: var(--text-secondary);
+
+  font-size: 0.9rem;
+}
+
+.drawing-updated {
+  margin-top: 0.35rem;
+}
+
+/* ===================================
+   ACTIONS
+=================================== */
+
+.drawing-actions {
+  display: flex;
+
+  gap: 0.75rem;
+}
+
+.drawing-actions .secondary-btn,
+.drawing-actions .danger-btn {
+  margin: 0;
+}
+
+/* ===================================
+   DELETE PANEL
+=================================== */
+
+.delete-panel {
+  max-height: 0;
+
+  overflow: hidden;
+
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease;
+
+  border-top: 1px solid transparent;
+
+  padding: 0 1.5rem;
+}
+
+.delete-panel.open {
+  max-height: 180px;
+
+  padding: 1.5rem;
+
+  border-color: var(--border);
+}
+
+.delete-panel p {
+  margin-bottom: 1rem;
+
+  color: var(--text-secondary);
+}
+
+.delete-panel form {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 900px) {
+  .gallery-header {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .gallery-header .primary-btn {
+    width: 100%;
+  }
+
+  .drawing-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .drawing-footer {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .drawing-actions {
+    width: 100%;
+  }
+
+  .drawing-actions a,
+  .drawing-actions button {
+    flex: 1;
+  }
+
+  .delete-panel form {
+    justify-content: stretch;
+  }
+
+  .delete-panel button {
+    width: 100%;
+  }
+}
