@@ -1,57 +1,58 @@
 const userQueries = require("../db/queries/userQueries");
 const bcrypt = require("bcryptjs");
-const { validationResult } = require("express-validator");
 
 const getUserInfo = async (req, res, next) => {
   try {
     const user = await userQueries.getUserInfoQuery(req.user.id);
 
-    return res.render("userDetails", { title: "Account Information", user });
+    return res.render("profile", {
+      title: "Account Information",
+      user,
+      errors: [],
+      oldInput: {},
+      openSection: null,
+    });
   } catch (err) {
     next(err);
   }
 };
 
-const getUpdateUserForm = (req, res) => {
-  return res.render("updateUser", {
-    title: "Update User Info",
-    errors: [],
-    oldInput: {},
-  });
+//Removed get user update form controller
+//Moved error validator into middleware
+//Separated field updater controllers
+
+const updateUsername = async (req, res, next) => {
+  try {
+    await userQueries.updateUserInfoQuery(req.user.id, {
+      username: req.body.username,
+    });
+    return res.redirect("/user");
+  } catch (err) {
+    next(err);
+  }
 };
 
-const updateUserInfo = async (req, res, next) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).render("updateUser", {
-      title: "Update User Info",
-      errors: errors.array(),
-      oldInput: req.body,
-    });
-  }
-  const { email, username, password } = req.body;
-
-  const data = {};
-
-  if (email) {
-    data.email = email;
-  }
-
-  if (username) {
-    data.username = username;
-  }
-
-  if (password) {
-    data.password = await bcrypt.hash(password, 10);
-  }
-
-  if (Object.keys(data).length === 0) {
-    return res.redirect("/user");
-  }
+const updateEmail = async (req, res, next) => {
   try {
-    await userQueries.updateUserInfoQuery(req.user.id, data);
-    return res.redirect("/");
+    await userQueries.updateUserInfoQuery(req.user.id, {
+      email: req.body.email,
+    });
+    return res.redirect("/user");
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updatePassword = async (req, res, next) => {
+  const { password } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    await userQueries.updateUserInfoQuery(req.user.id, {
+      password: hashedPassword,
+    });
+    return res.redirect("/user");
   } catch (err) {
     next(err);
   }
@@ -59,6 +60,21 @@ const updateUserInfo = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
+    if (!(await bcrypt.compare(req.body.password, req.user.password))) {
+      return res.status(401).render("profile", {
+        title: "Account Information",
+        user: req.user,
+        errors: [
+          {
+            path: "deletePassword",
+            msg: "Incorrect password.",
+          },
+        ],
+        oldInput: {},
+        openSection: "delete",
+      });
+    }
+
     await userQueries.deleteUserQuery(req.user.id);
     req.logout((err) => {
       if (err) return next(err);
@@ -72,7 +88,8 @@ const deleteUser = async (req, res, next) => {
 
 module.exports = {
   getUserInfo,
-  getUpdateUserForm,
-  updateUserInfo,
+  updateUsername,
+  updateEmail,
+  updatePassword,
   deleteUser,
 };
