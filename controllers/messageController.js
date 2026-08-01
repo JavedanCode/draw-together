@@ -11,8 +11,8 @@ const getAllMessages = async (req, res, next) => {
 
 const getUserMessages = async (req, res, next) => {
   try {
-    const messages = await messageQueries.getUserMessagesQuery(req.user.id);
-    res.render("messages", { title: "Messages", messages });
+    const drawings = await messageQueries.getUserMessagesQuery(req.user.id);
+    res.render("messages", { title: "Messages", drawings, user: req.user });
   } catch (err) {
     next(err);
   }
