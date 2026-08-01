@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        <%= title %>
+    </title>
+
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+    <%- include("partials/navbar") %>
+    <main class="profile-page">
+
+        <!-- ===========================
+           PROFILE SUMMARY
+      ============================ -->
+
+        <section class="profile-summary">
+
+            <div class="avatar">
+                <%= user.username.charAt(0).toUpperCase() %>
+            </div>
+
+            <div class="summary-info">
+
+                <h1>
+                    <%= user.username %>
+                </h1>
+
+                <p class="member-status">
+                    <% if (user.featuredMember) { %>⭐ Featured
+                    Member
+                    <% } else { %>Member
+
+
+                    
+                    <% } %>
+                </p>
+
+                <p class="joined">
+
+                    Joined
+                    <%= new Date(user.createdAt).toLocaleDateString() %>
+                </p>
+
+            </div>
+
+            <a href="/messages/mine" class="primary-btn">
+                My Drawings
+            </a>
+
+        </section>
+
+        <!-- ===========================
+           ACCOUNT SETTINGS
+      ============================ -->
+
+        <section class="settings-card">
+
+            <h2>Account Settings</h2>
+
+            <!-- USERNAME -->
+
+            <div class="setting">
+
+                <div class="setting-header">
+
+                    <div>
+
+                        <h3>Username</h3>
+
+                        <p>
+                            <%= user.username %>
+                        </p>
+
+                    </div>
+
+                    <button class="secondary-btn toggle-btn"
+                        data-target="username-section">
+                        Edit
+                    </button>
+
+                </div>
+
+                <div class="setting-body <%= openSection === 'username' ? 'open' : '' %>" id="username-section">
+                    
+
+                    <form action="/user/update-username" method="POST">
+
+                        <input type="text" name="username"
+                            placeholder="New username"
+                            value="<%= oldInput?.username || '' %>" />
+                        <% const usernameError = errors.find(error => error.path === "username"); %>
+                        <% if (usernameError) { %>
+                        <p class="form-error">
+                            <%= usernameError.msg %>
+                        </p>
+
+                        
+                        <% } %><button class="primary-btn"
+                            type="submit">
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="setting">
+
+                <div class="setting-header">
+
+                    <div>
+
+                        <h3>Email</h3>
+
+                        <p>
+                            <%= user.email %>
+                        </p>
+
+                    </div>
+
+                    <button class="secondary-btn toggle-btn"
+                        data-target="email-section">
+                        Edit
+                    </button>
+
+                </div>
+
+                <div class="setting-body <%= openSection === 'email' ? 'open' : '' %>" id="email-section">
+                    <form action="/user/update-email" method="POST">
+
+                        <input type="email" name="email" placeholder="New email"
+                            value="<%= oldInput?.email || '' %>" />
+
+                        <% const  emailError = errors.find(error => error.path === "email"); %>
+                        <% if (emailError) { %>
+                        <p class="form-error">
+                            <%= emailError.msg %>
+                        </p><% } %>
+
+                        <button class="primary-btn" type="submit">
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div class="setting">
+
+                <div class="setting-header">
+
+                    <div>
+
+                        <h3>Password</h3>
+
+                        <p>••••••••••••</p>
+
+                    </div>
+
+                    <button class="secondary-btn toggle-btn"
+                        data-target="password-section">
+                        Change
+                    </button>
+
+                </div>
+
+                <div class="setting-body <%= openSection === 'password' ? 'open' : '' %>" id="password-section">
+
+                    <form action="/user/update-password" method="POST">
+
+                        <input type="password" name="password"
+                            placeholder="New password" class="password-input" />
+
+                        <% const passwordError = errors.find(error => error.path === "password"); %>
+
+                        <% if (passwordError) { %>
+                        <p class="form-error">
+                            <%= passwordError.msg %>
+                        </p>
+                        <% } %>
+
+                        <input type="password" name="confirmPassword"
+                            placeholder="Confirm password"
+                            class="password-input" />
+
+                        <% const confirmError = errors.find(error => error.path === "confirmPassword"); %>
+
+                        <% if (confirmError) { %>
+                        <p class="form-error">
+                            <%= confirmError.msg %>
+                        </p>
+                        <% } %>
+
+                        <button type="button"
+                            class="secondary-btn hold-to-show">
+                            Hold to Reveal
+                        </button>
+
+                        <button class="primary-btn" type="submit">
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===========================
+           DANGER ZONE
+      ============================ -->
+
+        <section class="danger-card">
+
+            <h2>Danger Zone</h2>
+
+            <p>
+
+                Deleting your account permanently removes your profile
+                and all of your drawings.
+
+            </p>
+
+            <button class="danger-btn toggle-btn delete-section-btn" data-target="delete-section">
+                Delete Account
+            </button>
+
+            <div class="setting-body <%= openSection === 'delete' ? 'open' : '' %>" id="delete-section">
+
+
+                <form action="/user/delete" method="POST">
+
+                    <input type="password" name="password"
+                        placeholder="Enter your password"
+                        class="password-input" />
+
+                    <% const deleteError = errors.find(
+                        error => error.path === "deletePassword"
+                    ); %>
+
+                    <% if (deleteError) { %>
+                        <p class="form-error">
+                            <%= deleteError.msg %>
+                        </p>
+                    <% } %>
+
+                    <label class="checkbox">
+
+                        <input type="checkbox" required />
+
+                        I understand this action cannot be undone.
+
+                    </label>
+
+                    <button class="danger-btn" type="submit">
+                        Delete Forever
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="/js/profile.js"></script>
+
+</body>
+
+</html>
