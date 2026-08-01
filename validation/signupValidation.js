@@ -15,8 +15,8 @@ const signupValidation = [
         where: { email },
       });
 
-      if (existingUser && existingUser.id !== req.user.id) {
-        throw new Error("User with this email already exists.");
+      if (existingUser) {
+        throw new Error("User with this email already exists");
       }
 
       return true;
@@ -36,7 +36,7 @@ const signupValidation = [
         where: { username },
       });
 
-      if (existingUser && existingUser.id !== req.user.id) {
+      if (existingUser) {
         throw new Error("Username already exists.");
       }
 
