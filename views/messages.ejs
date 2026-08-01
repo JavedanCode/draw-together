@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/messages.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<main class="messages-page">
+
+    <section class="gallery-header">
+
+        <div>
+
+            <h1>My Drawings</h1>
+
+            <p>
+
+                <%= drawings.length %>
+                <%= drawings.length === 1 ? "Drawing" : "Drawings" %>
+
+            </p>
+
+        </div>
+
+        <a
+            href="/messages/new"
+            class="primary-btn"
+        >
+            + Create Drawing
+        </a>
+
+    </section>
+
+<% if(drawings.length === 0){ %>
+
+<section class="empty-state">
+
+    <div class="empty-icon">
+        🎨
+    </div>
+
+    <h2>
+        Nothing here yet.
+    </h2>
+
+    <p>
+
+        Create your first drawing and it'll appear here.
+
+    </p>
+
+    <a
+        href="/messages/new"
+        class="primary-btn"
+    >
+        Create Drawing
+    </a>
+
+</section>
+
+<% } else { %>
+
+<section class="drawing-gallery">
+
+<% drawings.forEach(drawing => { %>
+
+<article class="drawing-card">
+
+    <div class="drawing-preview">
+        <img
+            src="<%= drawing.imageData %>"
+            alt="Drawing"
+        >
+    </div>
+
+    <div class="drawing-footer">
+
+        <div>
+
+            <%
+            const created = new Date(drawing.createdAt);
+            const updated = new Date(drawing.updatedAt);
+            %>
+
+            <p class="drawing-date">
+                Created
+                <%= created.toLocaleDateString() %>
+            </p>
+
+            <% if (created.getTime() !== updated.getTime()) { %>
+
+            <p class="drawing-updated">
+                Updated
+                <%= updated.toLocaleDateString() %>
+            </p>
+
+            <% } %>
+
+        </div>
+
+        <div class="drawing-actions">
+
+            <a
+                href="/messages/<%= drawing.id %>/update"
+                class="secondary-btn"
+            >
+                Edit
+            </a>
+
+            <button
+                class="danger-btn delete-toggle"
+                data-target="delete-<%= drawing.id %>"
+            >
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        class="delete-panel"
+        id="delete-<%= drawing.id %>"
+    >
+
+        <p>
+
+            Delete this drawing permanently?
+
+        </p>
+
+        <form
+            action="/messages/<%= drawing.id %>/delete"
+            method="POST"
+        >
+
+            <button
+                class="danger-btn"
+                type="submit"
+            >
+                Delete Forever
+            </button>
+
+        </form>
+
+    </div>
+
+</article>
+
+<% }) %>
+
+</section>
+
+<% } %>
+
+</main>
+
+<script src="/js/messages.js"></script>
+
+</body>
+</html>
