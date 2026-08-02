@@ -9,6 +9,7 @@ const messageRoutes = require("./routes/messageRoutes");
 const membershipRoutes = require("./routes/membershipRoutes");
 const userRoutes = require("./routes/userRoutes");
 const indexRoutes = require("./routes/indexRoutes");
+const likeRoutes = require("./routes/likeRoutes");
 
 require("dotenv").config();
 require("./config/passport");
@@ -56,6 +57,7 @@ app.use(passport.session());
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
 app.use("/messages", messageRoutes);
+app.use("/likes", likeRoutes);
 app.use("/user", userRoutes);
 app.use("/membership", membershipRoutes);
 app.use("/", indexRoutes);
