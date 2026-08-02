@@ -3,7 +3,18 @@ const messageQueries = require("../db/queries/messageQueries");
 const getAllMessages = async (req, res, next) => {
   try {
     const messages = await messageQueries.getAllMessagesQuery();
-    res.render("dashboard", { title: "Dashboard", messages, user: req.user });
+
+    const featuredDrawings = await messageQueries.getFeaturedDrawingsQuery();
+
+    const stats = await messageQueries.getDashboardStatsQuery(req.user.id);
+
+    res.render("dashboard", {
+      title: "Dashboard",
+      user: req.user,
+      messages,
+      featuredDrawings,
+      stats,
+    });
   } catch (err) {
     next(err);
   }
