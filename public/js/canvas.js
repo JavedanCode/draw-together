@@ -16,6 +16,8 @@ let drawing = false;
 let currentColor = "#000000";
 let currentBrush = 5;
 
+let currentImage = null;
+
 let erasing = false;
 
 let history = [];
@@ -29,10 +31,6 @@ const brushValue = document.getElementById("brushValue");
 =========================== */
 
 function resizeCanvas() {
-  const snapshot = canvas.toDataURL();
-
-  loadImage(snapshot);
-
   const ratio = 16 / 9;
 
   const width = canvas.clientWidth;
@@ -44,19 +42,17 @@ function resizeCanvas() {
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
-  const img = new Image();
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  img.onload = () => {
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  };
-
-  img.src = snapshot;
+  if (currentImage) {
+    loadImage(currentImage);
+  }
 }
 
 function loadImage(imageData) {
+  currentImage = imageData;
+
   const img = new Image();
 
   img.onload = () => {
@@ -96,6 +92,8 @@ function stopDrawing() {
   drawing = false;
 
   ctx.beginPath();
+
+  currentImage = canvas.toDataURL("image/png");
 }
 
 function draw(e) {
@@ -152,6 +150,7 @@ undoBtn.addEventListener("click", () => {
   const previous = history.pop();
 
   ctx.putImageData(previous, 0, 0);
+  currentImage = canvas.toDataURL("image/png");
 });
 
 clearBtn.addEventListener("click", () => {
@@ -163,6 +162,7 @@ clearBtn.addEventListener("click", () => {
 
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  currentImage = canvas.toDataURL("image/png");
 });
 
 document.addEventListener("keydown", (e) => {
