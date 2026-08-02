@@ -21,6 +21,7 @@ model User {
   updatedAt      DateTime @updatedAt
 
   drawings       Drawing[]
+  likes Like[]
 }
 
 model Drawing {
@@ -35,6 +36,19 @@ model Drawing {
 
   authorId   Int
   author     User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  likes Like[]
+}
+
+model Like {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  drawingId Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  drawing Drawing @relation(fields: [drawingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, drawingId])
 }
 
 model Session {
