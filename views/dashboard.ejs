@@ -29,6 +29,106 @@
 
         <% } else { %>
 
+        <section class="dashboard-stats">
+
+            <div class="welcome">
+
+                <h2>
+                    Welcome,
+                    <%= user.username %> 👋
+                </h2>
+
+                <p>
+
+                    <% if(user.featuredMember){ %>
+
+                        ⭐ Featured Artist
+
+                    <% }else{ %>
+
+                        Community Member
+
+                    <% } %>
+
+                </p>
+
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span>🎨</span>
+
+                    <h3><%= stats.drawingCount %></h3>
+
+                    <p>Drawings</p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <span>❤️</span>
+
+                    <h3><%= stats.totalLikes %></h3>
+
+                    <p>Total Likes</p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <span>🏆</span>
+
+                    <h3>#<%= stats.ranking %></h3>
+
+                    <p>Community Rank</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+            <section class="featured-carousel">
+
+                <% featuredDrawings.forEach((drawing,index)=>{ %>
+
+                    <article
+                        class="featured-slide <%= index===0 ? 'active' : '' %>"
+                    >
+
+                        <img
+                            src="<%= drawing.imageData %>"
+                            alt=""
+                        >
+
+                        <div class="featured-info">
+
+                            <h2>
+
+                                <%= drawing.author.username %>
+
+                            </h2>
+
+                            <p>⭐ Featured Artist</p>
+
+                            <h2>
+                                <%= drawing.author.username %>
+                            </h2>
+
+                            <p>
+                                ❤️ <%= drawing._count.likes %> Likes
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            </section>
+
             <section class="feed">
 
                 <% messages.forEach(message => { %>
@@ -46,3 +146,5 @@
 </body>
 
 </html>
+
+<script src="/js/dashboard.js"></script>
