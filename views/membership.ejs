@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/membership.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+
+  <body>
+
+    <%- include("partials/navbar") %>
+
+    <main class="membership-page">
+
+      <!-- ==========================
+           HERO
+      =========================== -->
+
+      <section class="membership-hero">
+
+        <h1>Become a Featured Member</h1>
+
+        <p>
+
+          Support the Draw Together community and unlock
+          exclusive member features.
+
+        </p>
+
+      </section>
+
+      <!-- ==========================
+           MAIN CONTENT
+      =========================== -->
+
+      <section class="membership-grid">
+
+        <!-- LEFT -->
+
+        <article class="membership-card">
+
+          <h2>Your Membership</h2>
+
+          <% if(user.featuredMember){ %>
+
+            <div class="status-badge featured">
+
+              ⭐ Featured Member
+
+            </div>
+
+            <p>
+
+              You're already enjoying every membership benefit.
+              Thank you for supporting the community!
+
+            </p>
+
+            <a
+              href="/"
+              class="primary-btn"
+            >
+              Back to Dashboard
+            </a>
+
+          <% } else { %>
+
+            <div class="status-badge">
+
+              Standard Member
+
+            </div>
+
+            <p>
+
+              Upgrade today to feature your artwork and
+              stand out in the community.
+
+            </p>
+
+          <% } %>
+
+        </article>
+
+        <!-- RIGHT -->
+
+        <article class="membership-card">
+
+          <h2>Membership Benefits</h2>
+
+          <ul class="benefits-list">
+
+            <li>
+              ⭐ Display your name and publishing date on your drawings.
+            </li>
+
+            <li>
+              📌 Feature your favorite drawings.
+            </li>
+
+            <li>
+              👑 Receive a Featured Member badge.
+            </li>
+
+            <li>
+              ❤️ Support the Draw Together community.
+            </li>
+
+          </ul>
+
+          <% if(!user.featuredMember){ %>
+
+            <% if(error){ %>
+
+              <p class="form-error">
+
+                <%= error %>
+
+              </p>
+
+            <% } %>
+
+            <form
+              action="/membership"
+              method="POST"
+              class="membership-form"
+            >
+
+              <input
+                type="password"
+                name="memberCode"
+                placeholder="Enter Member Code"
+                autocomplete="off"
+                spellcheck="false"
+                value="<%= oldInput.memberCode || '' %>"
+                />
+
+              <button
+                class="primary-btn"
+                type="submit"
+              >
+                Become a Featured Member
+              </button>
+
+            </form>
+
+          <% } %>
+
+        </article>
+
+      </section>
+
+      <!-- ==========================
+           FOOTER NOTE
+      =========================== -->
+
+      <section class="membership-note">
+
+        <h3>Why become a Featured Member?</h3>
+
+        <p>
+
+          Featured Members help support Draw Together while
+          receiving recognition throughout the platform.
+          Your drawings can be highlighted, your name will be
+          displayed publicly, and you'll receive a Featured
+          Member badge on your profile.
+
+        </p>
+
+      </section>
+
+      <section class="membership-contact">
+
+        <h3>How do I become a Featured Member?</h3>
+
+        <p>
+
+            Featured Membership is currently granted manually.
+            If you'd like to support the project and unlock member
+            features, send me a message on Discord and I'll provide
+            you with your personal member code.
+
+        </p>
+
+        <div class="discord-card">
+
+            <span class="discord-label">
+
+            Discord
+
+            </span>
+
+            <code>TheGhostIsDead#0234</code>
+
+        </div>
+
+        <p class="contact-note">
+
+            Once you receive your code, simply enter it above and your
+            account will be upgraded instantly.
+
+        </p>
+
+        </section>
+
+    </main>
+
+  </body>
+</html>
