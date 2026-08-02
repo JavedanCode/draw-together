@@ -2,33 +2,56 @@
 
     <header class="drawing-header">
 
-        <div>
+        <div class="drawing-author">
 
-            <h3>
+            <div class="author-avatar">
+                <%= (message.authorId === user.id || message.author.featuredMember)
+                    ? message.author.username.charAt(0).toUpperCase()
+                    : "?"
+                %>
+            </div>
 
-                <% if(user.featuredMember){ %>
+            <div>
 
-                    <%= message.author.username %>
+                <h3>
 
-                <% }else{ %>
+                    <% if(message.authorId === user.id || message.author.featuredMember){ %>
 
-                    Anonymous
+                        <%= message.author.username %>
 
-                <% } %>
+                    <% } else { %>
 
-            </h3>
+                        Anonymous
 
-            <p>
+                    <% } %>
 
-                <% if(user.featuredMember){ %>
+                </h3>
 
-                    <%= message.createdAt.toLocaleString() %>
+                <p>
 
-                <% } %>
+                    <% if(message.authorId === user.id || message.author.featuredMember){ %>
 
-            </p>
+                        <%= message.createdAt.toLocaleString() %>
+
+                    <% } else { %>
+
+                        Anonymous Artist
+
+                    <% } %>
+
+                </p>
+
+            </div>
 
         </div>
+
+        <% if(message.author.featuredMember){ %>
+
+            <span class="featured-badge">
+                ⭐ Featured
+            </span>
+
+        <% } %>
 
     </header>
 
@@ -36,22 +59,43 @@
 
         <img
             src="<%= message.imageData %>"
-            alt="User drawing"
+            alt="Drawing"
         >
 
     </div>
 
-    <% if(user.admin || user.id === message.authorId){ %>
+    <footer class="drawing-footer">
 
-        <footer class="drawing-actions">
+        <button
+            type="button"
+            class="like-btn <%= message.likedByCurrentUser ? 'liked' : '' %>"
+            data-id="<%= message.id %>"
+        >
+
+            <span class="heart">
+                <%= message.likedByCurrentUser ? "❤️" : "🤍" %>
+            </span>
+
+            <span class="like-count">
+
+                <%= message._count.likes %>
+
+            </span>
+
+        </button>
+
+        <% if(user.admin || user.id === message.authorId){ %>
+
+        <div class="drawing-actions">
 
             <% if(user.id === message.authorId){ %>
 
-                <a
-                    href="/messages/<%= message.id %>/update"
-                >
-                    Update
-                </a>
+            <a
+                href="/messages/<%= message.id %>/update"
+                class="action-btn"
+            >
+                ✏ Edit
+            </a>
 
             <% } %>
 
@@ -60,16 +104,18 @@
                 method="POST"
             >
 
-                <button>
-
-                    Delete
-
+                <button
+                    class="action-btn delete-btn"
+                >
+                    🗑 Delete
                 </button>
 
             </form>
 
-        </footer>
+        </div>
 
-    <% } %>
+        <% } %>
+
+    </footer>
 
 </article>
