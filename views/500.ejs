@@ -1,35 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+
+    <title>
+        <%= title %>
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/error.css">
+
 </head>
+
 <body>
 
-<main class="error-page">
+    <main class="error-page fade-in">
 
-    <h1>500</h1>
+        <span class="error-code">
 
-    <h2>Something went wrong.</h2>
+            500
 
-    <p>
-        An unexpected error occurred while processing your request.
-        Please try again later.
-    </p>
+        </span>
 
-    <% if (error) { %>
-        <div class="error-details">
-            <strong>Development Error:</strong>
-            <pre><%= error %></pre>
+        <h1 class="display-font">
+
+            We drew
+            <span>outside the canvas.</span>
+
+        </h1>
+
+        <p class="text-muted">
+
+            Something unexpected happened while loading this page.
+            Give it another try in a moment.
+
+        </p>
+
+        <div class="error-actions">
+
+            <a href="/" class="btn btn-primary">
+
+                Back Home
+
+            </a>
+
         </div>
-    <% } %>
+        <% if (process.env.NODE_ENV === "development" && error) { %>
+        <details class="error-debug">
 
-    <a href="/" class="button">
-        Return Home
-    </a>
+            <summary>
 
-</main>
+                Development Details
+
+            </summary>
+
+            <pre>
+                <%= error %>
+            </pre>
+
+        </details>
+
+
+        
+        <% } %>
+    </main>
 
 </body>
+
 </html>
