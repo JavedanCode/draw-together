@@ -2,56 +2,61 @@
 
     <header class="drawing-header">
 
-        <div class="drawing-author">
+        <div class="drawing-meta">
 
-            <div class="author-avatar">
-                <%= (message.authorId === user.id || message.author.featuredMember)
-                    ? message.author.username.charAt(0).toUpperCase()
-                    : "?"
-                %>
-            </div>
+            <div class="drawing-user">
 
-            <div>
+                <% if(message.authorId === user.id || user.featuredMember){ %>
 
-                <h3>
-
-                    <% if(message.authorId === user.id || message.author.featuredMember){ %>
+                    <span class="username">
 
                         <%= message.author.username %>
 
-                    <% } else { %>
+                    </span>
+
+                <% } else { %>
+
+                    <span class="username">
 
                         Anonymous
 
-                    <% } %>
+                    </span>
 
-                </h3>
+                <% } %>
 
-                <p>
+                <% if(message.author.featuredMember){ %>
 
-                    <% if(message.authorId === user.id || message.author.featuredMember){ %>
+                    <span class="badge badge-featured">
 
-                        <%= message.createdAt.toLocaleString() %>
+                        <img
+                            src="/icons/glowing-star.svg"
+                            class="icon icon-badge"
+                            alt=""
+                        >
 
-                    <% } else { %>
+                        Featured
 
-                        Anonymous Artist
+                    </span>
 
-                    <% } %>
-
-                </p>
+                <% } %>
 
             </div>
 
+            <p class="drawing-date">
+
+                <% if(message.authorId === user.id || user.featuredMember){ %>
+
+                    <%= message.createdAt.toLocaleDateString() %>
+
+                <% } else { %>
+
+                    Anonymous Artist
+
+                <% } %>
+
+            </p>
+
         </div>
-
-        <% if(message.author.featuredMember){ %>
-
-            <span class="featured-badge">
-                ⭐ Featured
-            </span>
-
-        <% } %>
 
     </header>
 
@@ -59,7 +64,7 @@
 
         <img
             src="<%= message.imageData %>"
-            alt="Drawing"
+            alt="Community drawing"
         >
 
     </div>
@@ -73,7 +78,13 @@
         >
 
             <span class="heart">
-                <%= message.likedByCurrentUser ? "❤️" : "🤍" %>
+
+                <img
+                    src="/icons/<%= message.likedByCurrentUser ? 'heart-red.svg' : 'heart-default.svg' %>"
+                    class="icon icon-heart icon-theme"
+                    alt=""
+                >
+
             </span>
 
             <span class="like-count">
@@ -86,33 +97,49 @@
 
         <% if(user.admin || user.id === message.authorId){ %>
 
-        <div class="drawing-actions">
+            <div class="drawing-actions">
 
-            <% if(user.id === message.authorId){ %>
+                <% if(user.id === message.authorId){ %>
 
-            <a
-                href="/messages/<%= message.id %>/update"
-                class="action-btn"
-            >
-                ✏ Edit
-            </a>
+                    <a
+                        href="/messages/<%= message.id %>/update"
+                        class="action-btn"
+                    >
 
-            <% } %>
+                        <img
+                            src="/icons/edit.svg"
+                            class="icon icon-action icon-theme"
+                            alt=""
+                        >
 
-            <form
-                action="/messages/<%= message.id %>/delete"
-                method="POST"
-            >
+                        Edit
 
-                <button
-                    class="action-btn delete-btn"
+                    </a>
+
+                <% } %>
+
+                <form
+                    action="/messages/<%= message.id %>/delete"
+                    method="POST"
                 >
-                    🗑 Delete
-                </button>
 
-            </form>
+                    <button
+                        class="action-btn delete-btn"
+                    >
 
-        </div>
+                        <img
+                            src="/icons/delete.svg"
+                            class="icon icon-action icon-danger"
+                            alt=""
+                        >
+
+                        Delete
+
+                    </button>
+
+                </form>
+
+            </div>
 
         <% } %>
 
