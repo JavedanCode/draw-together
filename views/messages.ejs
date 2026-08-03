@@ -1,132 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
+
+    <meta charset="UTF-8">
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
-    />
+    >
 
     <title><%= title %></title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/messages.css">
-    <link rel="stylesheet" href="auth.css">
+
 </head>
 
 <body>
 
 <%- include("partials/navbar") %>
 
-<main class="messages-page">
+<main class="page fade-in">
 
-    <section class="gallery-header">
+<!-- =====================================
+     HERO
+===================================== -->
 
-        <div>
+<section class="messages-hero">
 
-            <h1>My Drawings</h1>
+    <h1 class="display-font">
 
-            <p>
+        My <span>Drawings</span>
 
-                <%= drawings.length %>
-                <%= drawings.length === 1 ? "Drawing" : "Drawings" %>
+    </h1>
 
-            </p>
+    <p class="text-muted">
 
-        </div>
+        You have
+        <strong><%= drawings.length %></strong>
+        <%= drawings.length === 1 ? "drawing" : "drawings" %>
+        in your gallery.
 
-        <a
-            href="/messages/new"
-            class="primary-btn"
+    </p>
+
+</section>
+
+<div class="section-divider"></div>
+
+<!-- =====================================
+     ACTIONS
+===================================== -->
+
+<section class="gallery-toolbar">
+
+    <a
+        href="/messages/new"
+        class="btn btn-primary"
+    >
+
+        <img
+            src="/icons/add.svg"
+            class="icon icon-button icon-theme"
+            alt=""
         >
-            + Create Drawing
-        </a>
 
-    </section>
+        Create Drawing
+
+    </a>
+
+</section>
+
+<div class="section-divider"></div>
+
+<!-- =====================================
+     EMPTY
+===================================== -->
 
 <% if(drawings.length === 0){ %>
 
-<section class="empty-state">
+<section class="empty-gallery">
 
-    <div class="empty-icon">
-        🎨
-    </div>
+    <img
+        src="/icons/paint-pallete.svg"
+        class="icon icon-large icon-theme"
+        alt=""
+    >
 
-    <h2>
-        Nothing here yet.
+    <h2 class="display-font">
+
+        Nothing Here Yet
+
     </h2>
 
-    <p>
+    <p class="text-muted">
 
-        Create your first drawing and it'll appear here.
+        Your drawings will appear here once you create them.
 
     </p>
 
     <a
         href="/messages/new"
-        class="primary-btn"
+        class="btn btn-primary"
     >
-        Create Drawing
+
+        Create Your First Drawing
+
     </a>
 
 </section>
 
 <% } else { %>
 
+<!-- =====================================
+     GALLERY
+===================================== -->
+
 <section class="drawing-gallery">
 
 <% drawings.forEach(drawing => { %>
 
-<article class="drawing-card">
+<article class="gallery-card">
 
-    <div class="drawing-preview">
+    <div class="gallery-image">
+
         <img
             src="<%= drawing.imageData %>"
             alt="Drawing"
         >
+
     </div>
 
-    <div class="drawing-footer">
+    <div class="gallery-info">
 
         <div>
 
             <%
-            const created = new Date(drawing.createdAt);
-            const updated = new Date(drawing.updatedAt);
+                const created = new Date(drawing.createdAt);
+                const updated = new Date(drawing.updatedAt);
             %>
 
-            <p class="drawing-date">
+            <p class="gallery-date">
+
                 Created
+
                 <%= created.toLocaleDateString() %>
+
             </p>
 
-            <% if (created.getTime() !== updated.getTime()) { %>
+            <% if(created.getTime() !== updated.getTime()){ %>
 
-            <p class="drawing-updated">
+            <p class="gallery-date secondary">
+
                 Updated
+
                 <%= updated.toLocaleDateString() %>
+
             </p>
 
             <% } %>
 
         </div>
 
-        <div class="drawing-actions">
+        <div class="gallery-actions">
 
             <a
                 href="/messages/<%= drawing.id %>/update"
-                class="secondary-btn"
+                class="action-link"
             >
+
+                <img
+                    src="/icons/edit.svg"
+                    class="icon icon-action icon-theme"
+                    alt=""
+                >
+
                 Edit
+
             </a>
 
             <button
-                class="danger-btn delete-toggle"
+                class="action-link delete-toggle"
                 data-target="delete-<%= drawing.id %>"
             >
+
+                <img
+                    src="/icons/delete.svg"
+                    class="icon icon-action icon-red"
+                    alt=""
+                >
+
                 Delete
+
             </button>
 
         </div>
@@ -150,10 +226,12 @@
         >
 
             <button
-                class="danger-btn"
+                class="btn btn-danger"
                 type="submit"
             >
+
                 Delete Forever
+
             </button>
 
         </form>
@@ -173,4 +251,5 @@
 <script src="/js/messages.js"></script>
 
 </body>
+
 </html>
