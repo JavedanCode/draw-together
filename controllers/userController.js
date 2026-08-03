@@ -17,10 +17,6 @@ const getUserInfo = async (req, res, next) => {
   }
 };
 
-//Removed get user update form controller
-//Moved error validator into middleware
-//Separated field updater controllers
-
 const updateUsername = async (req, res, next) => {
   try {
     await userQueries.updateUserInfoQuery(req.user.id, {
