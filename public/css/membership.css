@@ -1,149 +1,126 @@
-/* ===================================
+/* ==========================================
    PAGE
-=================================== */
-
-.membership-page {
-  width: min(1100px, 94%);
-  margin: 3rem auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* ===================================
-   HERO
-=================================== */
+========================================== */
 
 .membership-hero {
-  padding: 3rem;
-
   text-align: center;
 
-  background: linear-gradient(135deg, var(--surface), var(--surface-light));
-
-  border: 1px solid var(--border);
-
-  border-radius: 24px;
-
-  box-shadow: var(--shadow-lg);
+  padding: 2rem 0 3rem;
 }
 
 .membership-hero h1 {
-  font-size: 2.4rem;
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
 
   margin-bottom: 1rem;
 }
 
 .membership-hero p {
-  max-width: 700px;
+  max-width: 650px;
 
   margin: 0 auto;
-
-  color: var(--text-secondary);
-
-  line-height: 1.7;
-
-  font-size: 1.05rem;
 }
 
-/* ===================================
-   GRID
-=================================== */
+/* ==========================================
+   BENEFITS
+========================================== */
 
-.membership-grid {
+.benefits-grid {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
   gap: 2rem;
+
+  margin-top: 3rem;
 }
 
-.membership-card {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 1.5rem;
-
-  padding: 2rem;
-
-  background: var(--surface);
-
-  border: 1px solid var(--border);
-
-  border-radius: 20px;
-
-  box-shadow: var(--shadow-lg);
-}
-
-.membership-card h2 {
-  font-size: 1.35rem;
-}
-
-/* ===================================
-   STATUS
-=================================== */
-
-.status-badge {
-  display: inline-flex;
-
-  align-items: center;
-
-  width: fit-content;
-
-  padding: 0.65rem 1rem;
-
-  border-radius: 999px;
-
-  background: var(--surface-light);
-
-  border: 1px solid var(--border);
-
-  font-weight: 600;
-}
-
-.status-badge.featured {
-  background: rgba(255, 196, 0, 0.12);
-
-  color: #f4c542;
-
-  border-color: rgba(255, 196, 0, 0.35);
-}
-
-/* ===================================
-   BENEFITS
-=================================== */
-
-.benefits-list {
+.benefit {
   display: flex;
 
   flex-direction: column;
 
   gap: 1rem;
-
-  list-style: none;
-
-  padding: 0;
-
-  margin: 0;
 }
 
-.benefits-list li {
+.benefit h3 {
+  font-size: 1.3rem;
+}
+
+.benefit p {
+  color: var(--text-secondary);
+
+  line-height: 1.7;
+}
+
+/* ==========================================
+   DISCORD
+========================================== */
+
+.membership-join {
+  max-width: 720px;
+
+  margin: auto;
+
+  text-align: center;
+}
+
+.membership-join p {
+  margin-top: 1rem;
+
+  line-height: 1.8;
+}
+
+.discord-box {
+  width: fit-content;
+
+  margin: 2rem auto 0;
+
+  padding: 1rem 1.5rem;
+
   display: flex;
 
   align-items: center;
 
-  gap: 0.75rem;
+  gap: 1rem;
 
-  color: var(--text-secondary);
+  border: 1px solid var(--border);
 
-  line-height: 1.6;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.02);
+
+  transition: 0.25s;
 }
 
-/* ===================================
-   FORM
-=================================== */
+.discord-box:hover {
+  border-color: var(--accent);
+
+  transform: translateY(-2px);
+}
+
+.discord-box span {
+  font-size: 1.05rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================
+   ACTIVATION
+========================================== */
+
+.activate-section {
+  max-width: 500px;
+
+  margin: auto;
+
+  text-align: center;
+}
+
+.activate-section p {
+  margin-top: 1rem;
+}
 
 .membership-form {
   display: flex;
@@ -152,177 +129,117 @@
 
   gap: 1.25rem;
 
-  margin-top: auto;
+  margin-top: 2rem;
 }
 
 .membership-form input {
   width: 100%;
 
-  padding: 1rem;
+  padding: 1rem 1.25rem;
 
-  border-radius: 12px;
+  background: transparent;
 
   border: 1px solid var(--border);
 
-  background: var(--surface-light);
+  border-radius: 12px;
 
   color: var(--text);
 
   font-size: 1rem;
 
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
 .membership-form input:focus {
   outline: none;
 
   border-color: var(--accent);
+
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
 }
 
-.membership-form .primary-btn {
+.membership-form button {
   width: 100%;
 }
 
-/* ===================================
-   INFO
-=================================== */
+/* ==========================================
+   ALREADY FEATURED
+========================================== */
 
-.membership-note {
-  padding: 2.5rem;
+.already-featured {
+  display: flex;
 
-  background: var(--surface);
-
-  border: 1px solid var(--border);
-
-  border-radius: 20px;
-
-  box-shadow: var(--shadow-lg);
-
-  text-align: center;
-}
-
-.membership-note h3 {
-  margin-bottom: 1rem;
-
-  font-size: 1.5rem;
-}
-
-.membership-note p {
-  max-width: 720px;
-
-  margin: 0 auto;
-
-  color: var(--text-secondary);
-
-  line-height: 1.8;
-}
-
-/* ===================================
-   ERROR
-=================================== */
-
-.form-error {
-  color: #ef4444;
-
-  font-size: 0.95rem;
-
-  font-weight: 500;
-}
-
-/* ===================================
-   MOBILE
-=================================== */
-
-@media (max-width: 850px) {
-  .membership-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .membership-hero {
-    padding: 2rem;
-  }
-
-  .membership-hero h1 {
-    font-size: 2rem;
-  }
-
-  .membership-card {
-    padding: 1.5rem;
-  }
-
-  .membership-form .primary-btn {
-    width: 100%;
-  }
-}
-
-/* ===================================
-   CONTACT
-=================================== */
-
-.membership-contact {
-  padding: 2.5rem;
-
-  background: var(--surface);
-
-  border: 1px solid var(--border);
-
-  border-radius: 20px;
-
-  box-shadow: var(--shadow-lg);
-
-  text-align: center;
-}
-
-.membership-contact h3 {
-  margin-bottom: 1rem;
-
-  font-size: 1.5rem;
-}
-
-.membership-contact > p {
-  max-width: 700px;
-
-  margin: 0 auto 2rem;
-
-  color: var(--text-secondary);
-
-  line-height: 1.8;
-}
-
-.discord-card {
-  display: inline-flex;
+  flex-direction: column;
 
   align-items: center;
 
   gap: 1rem;
-
-  padding: 1rem 1.5rem;
-
-  border-radius: 14px;
-
-  background: var(--surface-light);
-
-  border: 1px solid var(--border);
-
-  margin-bottom: 1.5rem;
 }
 
-.discord-label {
-  font-weight: 700;
-
-  color: #5865f2;
+.already-featured h2 {
+  font-size: 2rem;
 }
 
-.discord-card code {
-  font-size: 1rem;
-
-  font-family: monospace;
-
-  color: var(--text);
+.already-featured .primary-btn {
+  margin-top: 1rem;
 }
 
-.contact-note {
-  color: var(--text-secondary);
+/* ==========================================
+   ICONS
+========================================== */
 
-  font-size: 0.95rem;
+.icon-featured {
+  width: 34px;
+
+  height: 34px;
+}
+
+.icon-discord {
+  width: 26px;
+
+  height: 26px;
+}
+
+.icon-xl {
+  width: 60px;
+
+  height: 60px;
+}
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.form-error {
+  margin-top: 1.5rem;
+
+  color: #ff6b6b;
+
+  font-weight: 600;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+  .membership-hero {
+    padding-top: 1rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+
+    gap: 2.5rem;
+  }
+
+  .discord-box {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .discord-box span {
+    font-size: 0.95rem;
+  }
 }

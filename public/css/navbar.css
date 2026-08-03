@@ -1,0 +1,127 @@
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar {
+  width: min(1500px, 94%);
+
+  margin: auto;
+
+  padding: 1rem 0;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border-bottom: 1px solid var(--border);
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  text-decoration: none;
+
+  color: var(--text);
+}
+
+.logo-image {
+  width: 64px;
+
+  height: 64px;
+
+  object-fit: contain;
+}
+
+.logo span {
+  font-size: 2rem;
+
+  line-height: 1;
+}
+
+/* ==========================================
+   LINKS
+========================================== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+.nav-links a,
+.logout-btn,
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  white-space: nowrap;
+
+  padding: 0.35rem 0;
+
+  color: var(--text-secondary);
+
+  transition: 0.2s;
+  background: none;
+  border: none;
+}
+
+.nav-links a:hover,
+.logout-btn:hover {
+  color: var(--text);
+
+  transform: translateY(-2px);
+}
+
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* ==========================================
+   THEME
+========================================== */
+
+.theme-selector {
+  background: transparent;
+
+  border: none;
+
+  color: var(--text-secondary);
+
+  font-size: 0.95rem;
+
+  cursor: pointer;
+}
+
+.theme-selector:focus {
+  outline: none;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+
+    gap: 2rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 1.5rem;
+  }
+}

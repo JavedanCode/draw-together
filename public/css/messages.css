@@ -1,139 +1,108 @@
-/* ===================================
-   PAGE
-=================================== */
+/* ==========================================
+   HERO
+========================================== */
 
-.messages-page {
-  width: min(1200px, 94%);
-  margin: 3rem auto;
-
+.messages-hero {
   display: flex;
+
   flex-direction: column;
-  gap: 2.5rem;
-}
 
-/* ===================================
-   HEADER
-=================================== */
-
-.gallery-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
-
-  padding: 2rem;
-
-  background: var(--surface);
-
-  border: 1px solid var(--border);
-
-  border-radius: 20px;
-
-  box-shadow: var(--shadow-lg);
-}
-
-.gallery-header h1 {
-  font-size: 2rem;
-
-  margin-bottom: 0.35rem;
-}
-
-.gallery-header p {
-  color: var(--text-secondary);
-}
-
-/* ===================================
-   EMPTY STATE
-=================================== */
-
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 1rem;
 
   text-align: center;
 
-  padding: 5rem 2rem;
+  gap: 0.75rem;
 
-  background: var(--surface);
-
-  border: 1px solid var(--border);
-
-  border-radius: 20px;
-
-  box-shadow: var(--shadow-lg);
+  margin-bottom: 3rem;
 }
 
-.empty-icon {
-  font-size: 5rem;
+/* ==========================================
+   TOOLBAR
+========================================== */
+
+.gallery-toolbar {
+  display: flex;
+
+  justify-content: center;
+
+  margin: 3rem 0;
 }
 
-.empty-state h2 {
-  font-size: 2rem;
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-gallery {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  gap: 1.5rem;
+
+  padding: 5rem 0;
 }
 
-.empty-state p {
-  color: var(--text-secondary);
+.icon-large {
+  width: 64px;
 
-  max-width: 450px;
+  height: 64px;
 
-  line-height: 1.7;
+  opacity: 0.8;
 }
 
-/* ===================================
+/* ==========================================
    GALLERY
-=================================== */
+========================================== */
 
 .drawing-gallery {
   display: grid;
 
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
 
-  gap: 2rem;
+  gap: 2.5rem;
+
+  margin-top: 3rem;
 }
 
-/* ===================================
+/* ==========================================
    CARD
-=================================== */
+========================================== */
 
-.drawing-card {
+.gallery-card {
   display: flex;
+
   flex-direction: column;
 
-  background: var(--surface);
+  gap: 1.25rem;
+}
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+.gallery-image {
+  overflow: hidden;
 
   border: 1px solid var(--border);
 
-  border-radius: 18px;
+  border-radius: 22px;
 
-  overflow: hidden;
+  background: var(--surface);
 
-  box-shadow: var(--shadow-lg);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: 0.3s;
 }
 
-.drawing-card:hover {
-  transform: translateY(-6px);
+.gallery-image:hover {
+  transform: translateY(-4px);
 
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent);
 }
 
-/* ===================================
-   IMAGE
-=================================== */
-
-.drawing-preview {
-  background: var(--surface-light);
-
-  padding: 1.5rem;
-}
-
-.drawing-preview img {
+.gallery-image img {
   display: block;
 
   width: 100%;
@@ -143,137 +112,120 @@
   object-fit: contain;
 
   background: white;
-
-  border-radius: 12px;
-
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.08),
-    0 12px 25px rgba(0, 0, 0, 0.18);
-
-  transition: transform 0.2s ease;
 }
 
-.drawing-card:hover img {
-  transform: scale(1.015);
-}
+/* ==========================================
+   INFO
+========================================== */
 
-/* ===================================
-   FOOTER
-=================================== */
-
-.drawing-footer {
+.gallery-info {
   display: flex;
+
   justify-content: space-between;
-  align-items: center;
+
+  align-items: flex-start;
 
   gap: 2rem;
-
-  padding: 1.4rem 1.5rem;
 }
 
-.drawing-date,
-.drawing-updated {
-  color: var(--text-secondary);
+.gallery-date {
+  color: var(--text);
 
-  font-size: 0.9rem;
+  font-weight: 500;
+
+  margin-bottom: 0.35rem;
 }
 
-.drawing-updated {
-  margin-top: 0.35rem;
+.gallery-date.secondary {
+  color: var(--text-muted);
+
+  font-size: 0.92rem;
 }
 
-/* ===================================
+/* ==========================================
    ACTIONS
-=================================== */
+========================================== */
 
-.drawing-actions {
+.gallery-actions {
   display: flex;
 
-  gap: 0.75rem;
+  gap: 1.25rem;
 }
 
-.drawing-actions .secondary-btn,
-.drawing-actions .danger-btn {
-  margin: 0;
+.action-link {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.45rem;
+
+  background: none;
+
+  border: none;
+
+  color: var(--text-muted);
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  font-size: 0.95rem;
+
+  transition: 0.25s;
 }
 
-/* ===================================
+.action-link:hover {
+  color: var(--text);
+
+  transform: translateY(-2px);
+}
+
+/* ==========================================
    DELETE PANEL
-=================================== */
+========================================== */
 
 .delete-panel {
-  max-height: 0;
+  display: none;
 
-  overflow: hidden;
+  margin-top: 0.5rem;
 
-  transition:
-    max-height 0.35s ease,
-    padding 0.35s ease;
+  padding-top: 1.5rem;
 
-  border-top: 1px solid transparent;
-
-  padding: 0 1.5rem;
+  border-top: 1px solid var(--border);
 }
 
 .delete-panel.open {
-  max-height: 180px;
-
-  padding: 1.5rem;
-
-  border-color: var(--border);
+  display: block;
 }
 
 .delete-panel p {
   margin-bottom: 1rem;
 
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
-.delete-panel form {
-  display: flex;
-
-  justify-content: flex-end;
-}
-
-/* ===================================
+/* ==========================================
    MOBILE
-=================================== */
+========================================== */
 
 @media (max-width: 900px) {
-  .gallery-header {
-    flex-direction: column;
-
-    align-items: stretch;
-  }
-
-  .gallery-header .primary-btn {
-    width: 100%;
-  }
-
   .drawing-gallery {
     grid-template-columns: 1fr;
   }
 
-  .drawing-footer {
+  .gallery-info {
     flex-direction: column;
 
-    align-items: stretch;
+    gap: 1.5rem;
   }
 
-  .drawing-actions {
+  .gallery-actions {
     width: 100%;
+
+    justify-content: space-between;
   }
 
-  .drawing-actions a,
-  .drawing-actions button {
-    flex: 1;
-  }
-
-  .delete-panel form {
-    justify-content: stretch;
-  }
-
-  .delete-panel button {
+  .gallery-toolbar .btn-primary {
     width: 100%;
   }
 }
