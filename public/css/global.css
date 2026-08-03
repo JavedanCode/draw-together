@@ -1,47 +1,18 @@
-/* ===========================
+/* ==========================================================
    RESET
-=========================== */
+========================================================== */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+
   margin: 0;
   padding: 0;
 }
 
-/* ===========================
-   DESIGN TOKENS
-=========================== */
-
-:root {
-  --bg: #111315;
-
-  --surface: #1b1e23;
-
-  --surface-light: #2a2f37;
-
-  --border: #343b45;
-
-  --text: #f3f4f6;
-
-  --text-secondary: #a4acb9;
-
-  --accent: #5b8cff;
-
-  --accent-hover: #709cff;
-
-  --shadow-lg: 0 30px 70px rgba(0, 0, 0, 0.45);
-
-  --radius: 18px;
-}
-
-/* ===========================
-   GLOBAL
-=========================== */
-
 html {
-  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -51,21 +22,18 @@ body {
 
   color: var(--text);
 
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: var(--font-ui);
 
-  line-height: 1.5;
+  line-height: 1.6;
+
+  text-rendering: optimizeLegibility;
 
   -webkit-font-smoothing: antialiased;
 }
 
 img {
   display: block;
+
   max-width: 100%;
 }
 
@@ -74,4 +42,550 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==========================================================
+   DESIGN TOKENS
+========================================================== */
+
+:root {
+  /* ==========================================================
+     DARK THEME (DEFAULT)
+  ========================================================== */
+
+  --bg: #030712;
+
+  --surface: #0b1220;
+
+  --surface-light: #111827;
+
+  --surface-hover: #162034;
+
+  --border: rgba(255, 255, 255, 0.733);
+
+  --text: #f8fafc;
+
+  --text-muted: #94a3b8;
+
+  --accent: #60a5fa;
+
+  --accent-hover: #3b82f6;
+
+  --success: #22c55e;
+
+  --warning: #fbbf24;
+
+  --danger: #ef4444;
+
+  --button-primary: white;
+  --button-primary-text: white;
+  --button-primary-hover: white;
+  --button-primary-hover-text: #030712;
+
+  --featured: #ffd54a;
+  --featured-border: rgba(255, 215, 74, 0.25);
+
+  --card-bg: rgba(255, 255, 255, 0.02);
+
+  --border-hover: rgba(255, 255, 255, 0.18);
+
+  --canvas-bg: white;
+  --canvas-border: rgba(15, 23, 42, 0.08);
+
+  --icon-filter: brightness(0) invert(1);
+
+  --icon-accent-filter: brightness(0) saturate(100%) invert(66%) sepia(75%)
+    saturate(924%) hue-rotate(184deg) brightness(101%) contrast(97%);
+
+  --icon-danger-filter: invert(24%) sepia(89%) saturate(3645%)
+    hue-rotate(343deg) brightness(93%) contrast(95%);
+
+  /* ---------- FONTS ---------- */
+
+  --font-ui: "Inter", sans-serif;
+
+  --font-display: "Edu VIC WA NT Hand", cursive;
+
+  /* ---------- RADIUS ---------- */
+
+  --radius-sm: 10px;
+
+  --radius: 16px;
+
+  --radius-lg: 24px;
+
+  /* ---------- SPACING ---------- */
+
+  --space-xs: 0.35rem;
+
+  --space-sm: 0.75rem;
+
+  --space-md: 1rem;
+
+  --space-lg: 2rem;
+
+  --space-xl: 4rem;
+
+  /* ---------- SHADOW ---------- */
+
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+
+  /* ---------- ANIMATION ---------- */
+
+  --transition: 200ms ease;
+
+  /* ==========================================================
+   LIGHT THEME
+========================================================== */
+
+  [data-theme="light"] {
+    --bg: #f8fafc;
+
+    --surface: #ffffff;
+
+    --surface-light: #f1f5f9;
+
+    --surface-hover: #e2e8f0;
+
+    --border: rgba(15, 23, 42, 0.12);
+
+    --text: #0f172a;
+
+    --text-muted: #64748b;
+
+    --accent: #3b82f6;
+
+    --accent-hover: #2563eb;
+
+    --success: #16a34a;
+
+    --warning: #d97706;
+
+    --danger: #dc2626;
+
+    --button-primary: #0f172a;
+    --button-primary-text: #0f172a;
+    --button-primary-hover: #0f172a;
+    --button-primary-hover-text: white;
+
+    --featured: #d97706;
+    --featured-border: rgba(217, 119, 6, 0.25);
+
+    --card-bg: #ffffff;
+
+    --canvas-bg: black;
+    --canvas-border: rgba(15, 23, 42, 0.08);
+
+    --border-hover: rgba(15, 23, 42, 0.2);
+
+    --icon-filter: brightness(0);
+
+    --icon-accent-filter: brightness(0) saturate(100%) invert(37%) sepia(98%)
+      saturate(1500%) hue-rotate(196deg) brightness(96%) contrast(95%);
+
+    --icon-danger-filter: invert(24%) sepia(89%) saturate(3645%)
+      hue-rotate(343deg) brightness(93%) contrast(95%);
+
+    --shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+  }
+}
+
+/* ==========================================================
+   TYPOGRAPHY
+========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+.display-font {
+  font-family: var(--font-display);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.page {
+  width: min(1400px, 94%);
+
+  margin-inline: auto;
+
+  padding-block: 3rem;
+}
+
+.container {
+  width: min(1200px, 94%);
+
+  margin-inline: auto;
+}
+
+.stack {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-lg);
+}
+
+.cluster {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  flex-wrap: wrap;
+}
+
+.grid {
+  display: grid;
+
+  gap: 1.5rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  text-align: center;
+
+  margin-bottom: 2rem;
+}
+
+.section-divider {
+  width: min(700px, 100%);
+
+  height: 1px;
+
+  margin: 4rem auto;
+
+  background: var(--border);
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn {
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  border: none;
+
+  border-radius: var(--radius);
+
+  padding: 0.85rem 1.3rem;
+
+  transition: var(--transition);
+
+  font-weight: 600;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: transparent;
+
+  border: 2px solid var(--button-primary);
+
+  color: var(--button-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--button-primary-hover);
+
+  color: var(--button-primary-hover-text);
+}
+
+.btn-secondary {
+  background: transparent;
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-light);
+}
+
+.btn-danger {
+  background: var(--danger);
+
+  color: white;
+}
+
+.btn-danger:hover {
+  filter: brightness(1.1);
+}
+
+.btn-icon {
+  width: 42px;
+
+  height: 42px;
+
+  padding: 0;
+
+  border-radius: 50%;
+}
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.input,
+textarea,
+select {
+  width: 100%;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  padding: 0.95rem 1rem;
+
+  transition: var(--transition);
+}
+
+.input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+
+  border-color: var(--accent);
+
+  background: var(--surface-light);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================
+   CARDS
+========================================================== */
+
+.card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  transition: var(--transition);
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.card-header {
+  padding: 1.25rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-footer {
+  padding: 1rem 1.25rem;
+}
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.35rem;
+
+  padding: 0.35rem 0.8rem;
+
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+
+  font-weight: 600;
+}
+
+.badge-featured {
+  background: rgba(251, 191, 36, 0.15);
+
+  color: var(--warning);
+}
+
+.badge-success {
+  background: rgba(34, 197, 94, 0.15);
+
+  color: var(--success);
+}
+
+/* ==========================================================
+   FORMS
+========================================================== */
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.45rem;
+}
+
+.form-error {
+  color: var(--danger);
+
+  font-size: 0.9rem;
+
+  margin-top: -0.25rem;
+}
+
+/* ==========================================================
+   UTILITIES
+========================================================== */
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-between {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mt-lg {
+  margin-top: 2rem;
+}
+
+.mb-lg {
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+.fade-in {
+  animation: fade 0.3s ease;
+}
+
+.hover-lift {
+  transition: var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-light);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+::selection {
+  background: var(--accent);
+
+  color: white;
 }
