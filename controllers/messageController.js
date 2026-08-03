@@ -2,7 +2,7 @@ const messageQueries = require("../db/queries/messageQueries");
 
 const getAllMessages = async (req, res, next) => {
   try {
-    const messages = await messageQueries.getAllMessagesQuery();
+    const messages = await messageQueries.getAllMessagesQuery(req.user.id);
 
     const featuredDrawings = await messageQueries.getFeaturedDrawingsQuery();
 
