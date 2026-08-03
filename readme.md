@@ -6,7 +6,7 @@ Draw Together allows users to create drawings directly in the browser, share the
 
 **Live Demo**
 
-https://your-url.onrender.com
+https://draw-together-d0j5.onrender.com/
 
 ---
 
@@ -14,15 +14,19 @@ https://your-url.onrender.com
 
 _Dashboard_
 
-(screenshot)
+<img width="1547" height="817" alt="image" src="https://github.com/user-attachments/assets/1c14bf22-da4c-423b-b804-8eac17abfeed" />
+
+_Featured Drawings_
+
+<img width="1425" height="843" alt="Screenshot 2026-08-03 160912" src="https://github.com/user-attachments/assets/ca99e0c4-03b9-4c02-883a-0ee009cd6214" />
 
 _Drawing Canvas_
 
-(screenshot)
+<img width="1521" height="877" alt="image" src="https://github.com/user-attachments/assets/42f0db03-f967-44cf-8943-5eabfbe2dbf9" />
 
 _Community Feed_
 
-(screenshot)
+<img width="1725" height="717" alt="Screenshot 2026-08-03 160925" src="https://github.com/user-attachments/assets/2370d7e4-242b-4f3a-aeda-224aaaa25864" />
 
 ---
 
@@ -133,6 +137,6 @@ npm start
 
 ## Author
 
-**Mohammad Mahdi Javedan**
+**JavedanCode**
 
 GitHub: https://github.com/JavedanCode
