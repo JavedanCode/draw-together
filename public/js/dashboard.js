@@ -15,11 +15,13 @@ likeButtons.forEach((button) => {
 
       const data = await response.json();
 
-      button.querySelector(".heart").textContent = data.liked ? "❤️" : "🤍";
+      const heartIcon = button.querySelector(".heart img");
+
+      heartIcon.src = data.liked
+        ? "/icons/heart-red.svg"
+        : "/icons/heart-default.svg";
 
       button.querySelector(".like-count").textContent = data.likeCount;
-
-      button.classList.toggle("liked", data.liked);
     } catch (err) {
       console.error(err);
     }
