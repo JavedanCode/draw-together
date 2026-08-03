@@ -1,107 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet" />
 
     <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/icons.css">
+
     <link rel="stylesheet" href="/css/auth.css">
+
 </head>
 
 <body>
 
-<main class="auth-page">
+    <main class="auth-page fade-in">
 
-    <section class="auth-card">
+        <section class="auth-hero">
 
-        <div class="auth-header">
+            <h1 class="display-font">
 
-            <h1 class="logo">
-                Draw Together
+                Draw <span>Together</span>
+
             </h1>
 
-            <p class="subtitle">
+            <p class="auth-tagline">
+
                 Draw instead of typing.
+
             </p>
 
-        </div>
+            <p class="text-muted">
 
-        <% if (error) { %>
+                Create drawings. Share them with the community.
+                See what everyone else is making.
 
+            </p>
+
+        </section>
+
+        <section class="auth-panel">
+            <% if (error) { %>
             <div class="form-error">
-
                 <%= error %>
-
             </div>
 
-        <% } %>
 
-        <form
-            action="/login"
-            method="POST"
-            class="auth-form"
-        >
+            
+            <% } %>
+            <form action="/login" method="POST" class="auth-form">
 
-            <div class="form-group">
+                <div class="form-group">
 
-                <label for="username">
-                    Username
-                </label>
+                    <label>
 
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    autocomplete="username"
-                    required
-                >
+                        Username
 
-            </div>
+                    </label>
 
-            <div class="form-group">
+                    <input type="text" name="username" autocomplete="username"
+                        required>
 
-                <label for="password">
-                    Password
-                </label>
+                </div>
 
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    autocomplete="current-password"
-                    required
-                >
+                <div class="form-group">
 
-            </div>
+                    <label>
 
-            <button
-                class="primary-btn"
-                type="submit"
-            >
-                Login
-            </button>
+                        Password
 
-        </form>
+                    </label>
 
-        <div class="auth-footer">
+                    <input type="password" name="password"
+                        autocomplete="current-password" required>
 
-            <p>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+
+                    Login
+
+                </button>
+
+            </form>
+
+            <p class="auth-footer">
 
                 Don't have an account?
 
                 <a href="/signup">
-                    Create one
+
+                    Create one →
+
                 </a>
 
             </p>
 
-        </div>
+        </section>
 
-    </section>
-
-</main>
+    </main>
 
 </body>
+
 </html>
