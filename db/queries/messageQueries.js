@@ -158,11 +158,10 @@ const getDashboardStatsQuery = async (userId) => {
   };
 };
 
-const getMessageQuery = async (userId, drawingId) => {
-  return prisma.drawing.findFirst({
+const getMessageQuery = async (drawingId) => {
+  return prisma.drawing.findUnique({
     where: {
       id: Number(drawingId),
-      authorId: Number(userId),
     },
   });
 };

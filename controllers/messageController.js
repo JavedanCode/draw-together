@@ -38,10 +38,7 @@ const getMessageForm = async (req, res) => {
 };
 
 const getUpdateMessageForm = async (req, res) => {
-  const drawing = await messageQueries.getMessageQuery(
-    req.user.id,
-    req.params.id,
-  );
+  const drawing = await messageQueries.getMessageQuery(req.params.id);
   res.render("drawingForm", {
     title: "Edit Drawing",
     drawing,
