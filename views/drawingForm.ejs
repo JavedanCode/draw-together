@@ -7,31 +7,67 @@
 
     <title><%= title %></title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="/css/global.css" />
+
+    <link rel="stylesheet" href="/css/navbar.css" />
+
+    <link rel="stylesheet" href="/css/icons.css" />
+
     <link rel="stylesheet" href="/css/canvas.css" />
-    <link rel="stylesheet" href="/css/dashboard.css" />
-    <link rel="stylesheet" href="/css/auth.css" />
   </head>
 
   <body>
     <%- include("partials/navbar") %>
 
-    <main class="drawing-page">
-      <section class="drawing-card">
-        <input
-          type="hidden"
-          id="existingImage"
-          value="<%= drawing ? drawing.imageData : '' %>"
-        />
-        <h1><%= drawing ? "Edit Drawing" : "Create a Drawing" %></h1>
+    <main class="page fade-in">
+      <!-- =====================================
+     HERO
+===================================== -->
 
+      <section class="canvas-hero">
+        <h1 class="display-font">
+          <%= drawing ? "Edit" : "Create" %>
+          <span>Drawing</span>
+        </h1>
+
+        <p class="text-muted">Everything starts with one line.</p>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- =====================================
+     WORKSPACE
+===================================== -->
+
+      <section class="workspace">
         <form
+          id="drawingForm"
           action="<%= drawing ? `/messages/${drawing.id}` : '/messages' %>"
           method="POST"
-          id="drawingForm"
         >
-          <div class="toolbar">
-            <div class="toolbar-group">
+          <input
+            type="hidden"
+            id="existingImage"
+            value="<%= drawing ? drawing.imageData : '' %>"
+          />
+
+          <input type="hidden" id="imageData" name="imageData" />
+
+          <!-- =====================================
+     TOOLBAR
+===================================== -->
+
+          <header class="workspace-toolbar">
+            <div class="toolbar-left">
               <div class="color-tools">
                 <button
                   type="button"
@@ -79,35 +115,86 @@
 
                 <input type="color" id="colorPicker" value="#000000" />
               </div>
+            </div>
+
+            <div class="toolbar-center">
+              <span class="toolbar-label"> Brush </span>
 
               <input type="range" id="brushSize" min="1" max="40" value="5" />
-              <span id="brushValue">5px</span>
+
+              <div class="brush-preview">
+                <div id="brushDot"></div>
+              </div>
+
+              <span id="brushValue"> 5 px </span>
             </div>
 
-            <div class="toolbar-group">
-              <button type="button" id="eraserBtn" class="tool-btn">
-                Eraser
+            <div class="toolbar-right">
+              <button
+                type="button"
+                id="eraserBtn"
+                class="tool-btn"
+                title="Eraser"
+              >
+                <img
+                  src="/icons/eraser.svg"
+                  class="icon icon-tool icon-theme"
+                  alt=""
+                />
               </button>
 
-              <button type="button" id="undoBtn" class="tool-btn">Undo</button>
+              <button type="button" id="undoBtn" class="tool-btn" title="Undo">
+                <img
+                  src="/icons/undo.svg"
+                  class="icon icon-tool icon-theme"
+                  alt=""
+                />
+              </button>
 
-              <button type="button" id="clearBtn" class="tool-btn danger">
-                Clear
+              <button
+                type="button"
+                id="clearBtn"
+                class="tool-btn danger"
+                title="Clear"
+              >
+                <img
+                  src="/icons/delete.svg"
+                  class="icon icon-tool icon-theme"
+                  alt=""
+                />
               </button>
             </div>
-          </div>
+          </header>
 
-          <div class="canvas-wrapper">
+          <!-- =====================================
+     CANVAS
+===================================== -->
+
+          <section class="canvas-area">
             <canvas id="drawingCanvas"></canvas>
-          </div>
+          </section>
 
-          <input type="hidden" name="imageData" id="imageData" />
+          <!-- =====================================
+     FOOTER
+===================================== -->
 
-          <div class="save-actions">
-            <button class="primary-btn save-btn" type="submit">
+          <footer class="workspace-footer">
+            <div class="shortcut-hints">
+              <span> Ctrl + Z Undo </span>
+
+              <span> Hold Eraser to erase </span>
+            </div>
+
+            <button class="btn btn-primary save-btn" type="submit">
+              <img
+                src="/icons/save.svg"
+                class="icon icon-theme icon-action"
+                alt=""
+              />
+
               <%= drawing ? "Update Drawing" : "Save Drawing" %>
             </button>
-          </div>
+          </footer>
         </form>
       </section>
     </main>
