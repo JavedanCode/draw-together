@@ -12,139 +12,260 @@
 
     <title><%= title %></title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/icons.css">
+
     <link rel="stylesheet" href="/css/dashboard.css">
+
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <link rel="stylesheet" href="/css/postCard.css">
 
 </head>
 
 <body>
 
-    <%- include("partials/navbar") %>
+<%- include("partials/navbar") %>
 
-    <main class="dashboard">
+<main class="page fade-in">
 
-        <% if(messages.length === 0){ %>
+<% if(messages.length === 0){ %>
 
-            <%- include("partials/emptyFeed") %>
+    <%- include("partials/emptyFeed") %>
+
+<% } else { %>
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="dashboard-hero">
+
+    <h1 class="display-font">
+
+        Welcome back,
+        <span><%= user.username %></span>
+
+    </h1>
+
+    <p class="text-muted">
+
+        <% if(user.featuredMember){ %>
+
+            <img
+                src="/icons/star.svg"
+                class="icon icon-theme icon-featured"
+                alt=""
+            >
+            You're a Featured Artist.
+            Your drawings appear in the featured gallery.
 
         <% } else { %>
 
-        <section class="dashboard-stats">
-
-            <div class="welcome">
-
-                <h2>
-                    Welcome,
-                    <%= user.username %> 👋
-                </h2>
-
-                <p>
-
-                    <% if(user.featuredMember){ %>
-
-                        ⭐ Featured Artist
-
-                    <% }else{ %>
-
-                        Community Member
-
-                    <% } %>
-
-                </p>
-
-            </div>
-
-            <div class="stats-grid">
-
-                <div class="stat-card">
-
-                    <span>🎨</span>
-
-                    <h3><%= stats.drawingCount %></h3>
-
-                    <p>Drawings</p>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <span>❤️</span>
-
-                    <h3><%= stats.totalLikes %></h3>
-
-                    <p>Total Likes</p>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <span>🏆</span>
-
-                    <h3>#<%= stats.ranking %></h3>
-
-                    <p>Community Rank</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-            <section class="featured-carousel">
-
-                <% featuredDrawings.forEach((drawing,index)=>{ %>
-
-                    <article
-                        class="featured-slide <%= index===0 ? 'active' : '' %>"
-                    >
-
-                        <img
-                            src="<%= drawing.imageData %>"
-                            alt=""
-                        >
-
-                        <div class="featured-info">
-
-                            <h2>
-
-                                <%= drawing.author.username %>
-
-                            </h2>
-
-                            <p>⭐ Featured Artist</p>
-
-                            <h2>
-                                <%= drawing.author.username %>
-                            </h2>
-
-                            <p>
-                                ❤️ <%= drawing._count.likes %> Likes
-                            </p>
-
-                        </div>
-
-                    </article>
-
-                <% }) %>
-
-            </section>
-
-            <section class="feed">
-
-                <% messages.forEach(message => { %>
-
-                    <%- include("partials/postCard",{message,user}) %>
-
-                <% }) %>
-
-            </section>
+            Draw something awesome today.
 
         <% } %>
 
-    </main>
+    </p>
+
+</section>
+
+<!-- =====================================
+     STATS
+===================================== -->
+
+<section class="stats-row">
+
+    <article class="stat">
+
+        <div class="stat-value">
+
+            <img
+                src="/icons/paint-pallete.svg"
+                class="icon stat-icon icon-theme"
+                alt=""
+            >
+            <%= stats.drawingCount %>
+
+        </div>
+
+        <p>Your Drawings</p>
+
+    </article>
+
+    <article class="stat">
+
+        <div class="stat-value">
+
+            <img
+                src="/icons/heart-default.svg"
+                alt=""
+                class="icon stat-icon icon-theme"
+            />
+            <%= stats.totalLikes %>
+
+        </div>
+
+        <p>Total Likes</p>
+
+    </article>
+
+    <article class="stat">
+
+        <div class="stat-value">
+            <img
+                src="/icons/trophy-outline.svg"
+                class="icon stat-icon icon-theme"
+                alt=""
+            >
+            #<%= stats.ranking %>
+
+        </div>
+
+        <p>Community Rank</p>
+
+    </article>
+
+</section>
+
+<div class="section-divider"></div>
+
+<!-- =====================================
+     FEATURED
+===================================== -->
+
+<% if(featuredDrawings.length){ %>
+
+<section>
+
+    <h2 class="section-title">
+
+        Featured Drawings
+
+    </h2>
+
+    <div class="section-divider"></div>
+
+    <section class="featured-carousel">
+
+        <% featuredDrawings.forEach((drawing,index)=>{ %>
+
+        <article
+            class="featured-slide <%= index === 0 ? 'active' : '' %>"
+        >
+
+            <div class="featured-image">
+
+                <img
+                    src="<%= drawing.imageData %>"
+                    alt="Featured drawing"
+                >
+
+            </div>
+
+            <aside class="featured-details">
+
+               
+                    <div class="badge badge-featured">
+
+                        <img
+                            src="/icons/glowing-star.svg"
+                            class="icon icon-badge"
+                            alt=""
+                        >
+
+                        Featured Artist
+
+                    </div>
+
+
+                <h2>
+
+                    <%= drawing.author.username %>
+
+                </h2>
+
+                <p class="text-muted">
+
+                    Community Favorite
+
+                </p>
+
+                <div class="featured-likes">
+
+                    <img
+                        src="/icons/heart-red.svg"
+                        class="icon icon-heart"
+                        alt=""
+                    >
+
+                    <span>
+
+                        <%= drawing._count.likes %>
+
+                        Likes
+
+                    </span>
+
+                </div>
+
+            </aside>
+
+        </article>
+
+        <% }) %>
+
+    </section>
+
+</section>
+
+<div class="section-divider"></div>
+
+<% } %>
+
+<!-- =====================================
+     COMMUNITY
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+
+        Community Drawings
+
+    </h2>
+
+    <div class="section-divider"></div>
+
+    <section class="feed">
+
+        <% messages.forEach(message=>{ %>
+
+            <%- include("partials/postCard",{message,user}) %>
+
+        <% }) %>
+
+    </section>
+
+</section>
+
+<% } %>
+
+</main>
+
+<script src="/js/dashboard.js"></script>
+
 
 </body>
 
 </html>
-
-<script src="/js/dashboard.js"></script>
