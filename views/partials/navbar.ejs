@@ -1,63 +1,47 @@
 <header class="navbar">
+  <a href="/" class="logo display-font">
+    <img
+      src="/images/logo-black-white.png"
+      alt="Draw Together"
+      class="logo-image"
+    />
 
-    <div class="nav-left">
+    <span>Draw Together</span>
+  </a>
 
-        <a
-            href="/"
-            class="logo"
-        >
-            Draw Together
-        </a>
+  <nav class="nav-links">
+    <a href="/messages/new">
+      <img src="/icons/add.svg" class="icon icon-nav" alt="" />
 
-    </div>
+      <span>New Drawing</span>
+    </a>
 
-    <nav class="nav-links">
+    <a href="/membership">
+      <img src="/icons/crown.svg" class="icon icon-nav" alt="" />
 
-        <a href="/messages/new">
-            New Drawing
-        </a>
+      <span>Become a Member</span>
+    </a>
 
-        <% if(!user.featuredMember){ %>
+    <a href="/user">
+      <img src="/icons/profile.svg" class="icon icon-nav" alt="" />
 
-            <a href="/membership">
-                Become Featured
-            </a>
+      <span>Profile</span>
+    </a>
 
-        <% } %>
+    <form action="/login/logout" method="POST">
+      <button type="submit" class="logout-btn">
+        <img src="/icons/logout.svg" class="icon icon-nav" alt="" />
 
-        <a href="/user">
-            Profile
-        </a>
+        <span>Logout</span>
+      </button>
+    </form>
 
-        <select
-            id="themeSelector"
-            class="theme-selector"
-        >
+    <button id="themeToggle" class="theme-btn" type="button">
+      <img src="/icons/theme-light-dark.svg" class="icon icon-nav" alt="" />
 
-            <option value="dark">
-                Dark
-            </option>
-
-            <option value="light">
-                Light
-            </option>
-
-        </select>
-
-        <form
-            action="/login/logout"
-            method="POST"
-        >
-
-            <button
-                type="submit"
-                class="logout-btn"
-            >
-                Logout
-            </button>
-
-        </form>
-
-    </nav>
-
+      <span>Dark</span>
+    </button>
+  </nav>
 </header>
+
+<script src="/js/theme.js"></script>
